@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -9,12 +9,13 @@ import Input from '@material-ui/core/Input';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import { refactorData } from '../utils/refactor'
 import { getColor } from '../utils/color'
+import { Typeahead } from 'react-bootstrap-typeahead';
 import axios from 'axios';
 
 const URL = 'https://pokeapi.co/api/v2/pokemon';
 
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme) => ({ 
     grow: {
       flexGrow: 1,
     },
@@ -56,7 +57,6 @@ const useStyles = makeStyles((theme) => ({
     },
     inputInput: {
       padding: theme.spacing(1, 1, 1, 0),
-      // vertical padding + font size from searchIcon
       paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
       transition: theme.transitions.create('width'),
       width: '100%',
@@ -74,56 +74,31 @@ const NavBar = () => {
     const [ query, setQuery ] = useState('');
     const { data, setData } = useContext(DataContext)
 
-    // useEffect(() => {
-    //     axios
-    //     .get(`${URL}/${query.toLocaleLowerCase()}`)
-    //     .then(res => {
-    //       const result = refactorData(res.data);
-    //       const color = getColor(result.species);
-    //       // console.log(`color ${color}`)
-    //       setData({ name : result.name,
-    //                   id : result.id, 
-    //                   imgSrc : result.imgSrc, 
-    //                   types : result.types,
-    //                   stats : result.stats,
-    //                   abilities : result.abilities, 
-    //                   height : result.height, 
-    //                   weight : result.weight,
-    //                   color : color
-    //                 });
-    //     })
-    //     .catch(err => {
-    //       setData('')
-    //       console.log(err);
-    //     })
-    //   }, [query])
 
 
+    const handleSubmit =  (e) => {
+      e.preventDefault();
+      axios
+      .get(`${URL}/${query.toLocaleLowerCase()}`)
+      .then(async (res) => {
+        const result = refactorData(res.data);
+        const colorResult = await getColor(result.species);
+        setData([{ name : result.name,
+                    id : result.id, 
+                    imgSrc : result.imgSrc, 
+                    types : result.types,
+                    stats : result.stats,
+                    abilities : result.abilities, 
+                    height : result.height, 
+                    weight : result.weight,
+                    color : colorResult.data.color.name
+                  }]);
+      })
+      .catch(err => {
+        setData([])
+      })
+    }
 
-      const handleSubmit =  (e) => {
-        e.preventDefault();
-        axios
-        .get(`${URL}/${query.toLocaleLowerCase()}`)
-        .then(async (res) => {
-          const result = refactorData(res.data);
-          /***** */
-          const colorResult = await getColor(result.species);
-          console.log(colorResult)
-          setData({ name : result.name,
-                      id : result.id, 
-                      imgSrc : result.imgSrc, 
-                      types : result.types,
-                      stats : result.stats,
-                      abilities : result.abilities, 
-                      height : result.height, 
-                      weight : result.weight,
-                      color : colorResult.data.color.name
-                    });
-        })
-        .catch(err => {
-          setData([])
-        })
-      }
 
 
     return (
@@ -136,6 +111,7 @@ const NavBar = () => {
                 <div className={classes.search}>
                       <form onSubmit={handleSubmit}>
                         <Input
+                            type="text"
                             id="input-with-icon-adornment"
                             startAdornment={
                             <InputAdornment position="start">
@@ -145,6 +121,7 @@ const NavBar = () => {
                             placeholder="Search Pokemon"
                             value={query}
                             onChange={event => setQuery(event.target.value)}
+                            required={true}
                         />
                         </form>  
                 </div>
