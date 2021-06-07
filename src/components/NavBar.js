@@ -9,7 +9,6 @@ import Input from '@material-ui/core/Input';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import { refactorData } from '../utils/refactor'
 import { getColor } from '../utils/color'
-import { Typeahead } from 'react-bootstrap-typeahead';
 import axios from 'axios';
 
 const URL = 'https://pokeapi.co/api/v2/pokemon';

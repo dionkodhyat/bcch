@@ -6,8 +6,6 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import icons from '../utils/typesImg'
 import { DataContext } from '../utils/context'
-import Paper from '@material-ui/core/Paper';
-import { Autorenew, CenterFocusStrong } from '@material-ui/icons';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 
 
