@@ -1,40 +1,111 @@
-import React from 'react'
-import { refactor } from '../utils/refactor'
+import React, { useState, useEffect } from 'react';
+import NavBar from '../components/NavBar'
+import { DataContext } from '../utils/context'
+import Pokemon from '../components/Pokemon'
+import { makeStyles } from '@material-ui/core/styles';
+import '../style/style.css'
+import { refactorData } from '../utils/refactor'
+import { getColor } from '../utils/color'
+
+import axios from 'axios';
+
+const URL = 'https://pokeapi.co/api/v2/pokemon';
+
+
+/* Styles */
+
+
+const useStyles = makeStyles((theme) => ({
+  modal: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  paper: {
+    backgroundColor: theme.palette.background.paper,
+    boxShadow: theme.shadows[5],
+  
+  },
+  container: {
+    display: "flex",
+    justifyContent: "space-around",
+    flexWrap: "wrap",
+    flexDirection: "row"
+  }
+}));
+
+
+
 
 const Pokedex = () => {
-    const [ query, setQuery ] = React.useState(''); 
-    
 
+   const [ data, setData ] = useState([]);
+   const value = { data, setData }
+   const [ initialVal, setInitialVal ] = useState('');
+   const classes = useStyles();
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        axios
-          .get(`${URL}/${query.toLocaleLowerCase()}`)
-          .then(res => {
-            const result = refactorData(res.data);
-            setResult({ name : result.name,
-                        id : result.id, 
-                        imgSrc : result.imgSrc, 
-                        types : result.types,
-                        stats : result.stats,
-                        abilities : result.abilities, 
-                        height : result.height, 
-                        weight : result.weight });
-            setData({ name : result.name, types : result.types, imgSrc : result.imgSrc})
-          })
-          .catch(err => {
-            console.log(err);
-          })
-      }
+   
+
+   useEffect(async () => {
+     const promises = new Array(8)
+                                  .fill()
+                                  .map((value, i) => axios.get(`${URL}/${i+274}`));
+
+    Promise.all(promises)
+                        .then(async (responseList) => {
+   
+                          const dataList = responseList.map(res => res.data)
+
+                          const dataArray = []
+                          let refactorDataList = dataList.map(async (data) => {
+                              const result = refactorData(data);
+                              const colorResult = await getColor(data.species)
+                              return ( { name : result.name,
+                                id : result.id, 
+                                imgSrc : result.imgSrc, 
+                                types : result.types,
+                                stats : result.stats,
+                                abilities : result.abilities, 
+                                height : result.height, 
+                                weight : result.weight,
+                                color : colorResult.data.color.name
+                              })
+                          })
+                          const result = await Promise.all(refactorDataList.map(async (item) => {
+                            await item
+                            return item;
+                          }))
+                          console.log(result)
+                          setData(result);
+
+                        })
+
+   }, [])
+
+   useState(() => {
+     console.log(`pokemon array after ${initialVal}`)
+     setData(initialVal)
+    setData(initialVal)
+   }, [initialVal])
+
 
     return (
+      <DataContext.Provider value={value}>
         <div>
-            <form onSubmit={e => handleSubmit(e)}>
-                <input type="text" value={query} onChange={e => setQuery(e.target.value())}></input>
-                <button type="submit">Search</button>
-            </form>
-            
+          <NavBar/>
+          <div className={classes.container}>
+          {data && data.map(value => <Pokemon name={value.name}
+                                              id={value.id} 
+                                              imgSrc={value.imgSrc} 
+                                              types={value.types} 
+                                              height={value.height} 
+                                              weight={value.weight} 
+                                              abilities={value.abilities}
+                                              color={value.color}
+                                              stats={value.stats}/>)}
         </div>
+        </div>
+        </DataContext.Provider>
     )
 }
 
