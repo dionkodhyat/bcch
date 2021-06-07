@@ -2,7 +2,7 @@
   "name": "pokedex",
   "version": "0.1.0",
   "private": true,
-   "homepage": "https://dionkodhyat.github.io/bcch",
+  "homepage": "https://dionkodhyat.github.io/bcch",
   "dependencies": {
     "@material-ui/core": "^4.11.4",
     "@material-ui/icons": "^4.11.2",
