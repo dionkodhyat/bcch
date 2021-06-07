@@ -9,8 +9,8 @@ import { makeStyles, withStyles } from "@material-ui/styles";
 import '../style/style.css'
 
 const useStyles = makeStyles(theme => ({
-  stat : {
-    marginTop: "1%"
+  root : {
+    marginTop: "10"
   }
 }));
 

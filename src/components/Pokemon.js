@@ -12,6 +12,7 @@ import Fade from '@material-ui/core/Fade';
 const useStyles = makeStyles((theme) => ({
     root: {
         marginTop: "15%"
+        // border: "1px solid black"
 
     },
     modal: {
