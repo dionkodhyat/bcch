@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PokemonInfo from '../components/PokemonInfo'
 import PokemonCard from '../components/PokemonCard'
+import NavBar from '../components/NavBar'
 import { DataContext } from '../utils/context'
 
 import { makeStyles } from '@material-ui/core/styles';

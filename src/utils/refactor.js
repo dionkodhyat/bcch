@@ -17,12 +17,30 @@ const refactorStats = (stats) => {
     return refactoredStats;
 }
 
+/* Convert from decimetres to cm */
+const convertHeight = (height) => {
+    return parseFloat(height * 10.0);
+}
+
+const convertWeight = (weight) => {
+    return parseFloat(weight / 10.0);
+}
+
+const refactorImg = (sprites) => {
+    const { front_default, back_default, front_shiny, back_shiny } = sprites;
+    const imgURLList = [front_default, back_default, front_shiny, back_shiny];
+    return imgURLList
+}
+
 export const refactorData = (data) => {
-    let { id, name, sprites, height, weight, types, abilities, stats} = data;
+    let { id, name, species, sprites, height, weight, types, abilities, stats} = data;
     if (!{ name, sprites, height, weight, types, abilities, stats}) return null;
-    const imgSrc = sprites.front_default;
+    const imgSrc = refactorImg(sprites);
     const refactoredTypes = refactorTypes(types);
     const refactoredAbilities = refactorAbilities(abilities);
     const refactoredStats = refactorStats(stats)
-    return { id, name, imgSrc, types : refactoredTypes, abilities : refactoredAbilities, stats : refactoredStats, height, weight};
+    const convertedHeight = convertHeight(height);
+    const convertedWeight = convertWeight(weight)
+    return { id, name, imgSrc, species,  types : refactoredTypes, abilities : refactoredAbilities, stats : refactoredStats, height : convertedHeight, weight : convertedWeight};
 }
+

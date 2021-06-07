@@ -1,0 +1,50 @@
+* {
+    font-family: sans-serif;
+    color: rgb(80, 80, 80)
+}
+
+
+
+.typeIcons {
+    width: 17%;
+    height: 17%;
+}
+
+.stat {
+    text-align: center;
+    display:flex;
+    flex-direction: column;
+}
+
+.statsContainer {
+    display:flex;
+    flex-wrap: wrap;
+}
+
+.statsContainer > div {
+    flex: 1 0 33.33333%; 
+}
+
+
+
+.infoContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.spritesContainer {
+    display: flex;
+    justify-content: center;
+    /* height: 0; */
+    padding-top: 56.5%
+}
+
+.resultContainer {
+    margin-top: 15%;
+
+}
+
+#pokemonName {
+    text-align: center;
+}
