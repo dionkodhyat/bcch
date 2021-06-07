@@ -50,16 +50,17 @@ const Pokedex = () => {
 
    
 
-   useEffect(async () => {
+   useEffect(() => {
      const promises = new Array(8)
                                   .fill()
-                                  .map((value, i) => axios.get(`${URL}/${i+274}`));
+                                  .map((value) => { 
+                                    const randomIndex = Math.floor(Math.random() * 1000) + 1;
+                                    return axios.get(`${URL}/${randomIndex}`)
+                                  });
 
     Promise.all(promises)
                         .then(async (responseList) => {
-   
                           const dataList = responseList.map(res => res.data)
-
                           const dataArray = []
                           let refactorDataList = dataList.map(async (data) => {
                               const result = refactorData(data);
