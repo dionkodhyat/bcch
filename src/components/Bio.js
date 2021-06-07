@@ -4,6 +4,10 @@ import { DataContext } from '../utils/context'
 import '../style/style.css'
 import { makeStyles } from '@material-ui/core'
 
+/** 
+ * This component is specifically for Pokemon's attributes and bio
+ * **/
+
 const useStyles = makeStyles(() => ({
     root : {
         display : "flex",
@@ -50,7 +54,6 @@ const Bio = (props) => {
             </divs>
             <div className={classes.value}>
                 {id && <div>#{' ', id}</div>}
-                {/* {types && <div> {types.join(', ')}</div>} */}
                 {types && types.map(type => <><img className={classes.img} src={icons[type]}/></>)}
                 {height && <div> {height}cm</div>}
                 {weight && <div> {weight}kg</div>}

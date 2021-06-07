@@ -8,6 +8,10 @@ import icons from '../utils/typesImg'
 import { DataContext } from '../utils/context'
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 
+/**
+ * This is the component that appears when users query a Pokemon. It displays a brief summary of the pokemon
+ */
+
 
 const useStyles = makeStyles((theme) => ({
   root: {

@@ -12,7 +12,11 @@ import axios from 'axios';
 const URL = 'https://pokeapi.co/api/v2/pokemon';
 
 
-/* Styles */
+/**
+ * This is the main hub of the app. It contains the search bar and where the query results are displayed.
+ * Additionally in the beginning of the app, there is a function that retrieves pokemons to
+ * display
+ */
 
 
 const useStyles = makeStyles((theme) => ({

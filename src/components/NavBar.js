@@ -13,6 +13,10 @@ import axios from 'axios';
 
 const URL = 'https://pokeapi.co/api/v2/pokemon';
 
+/*
+  The Navigation bar that contains the search functionality. It utilizes the context API to assign the data to the data variable in order to
+  avoid props drilling
+*/
 
 const useStyles = makeStyles((theme) => ({ 
     grow: {

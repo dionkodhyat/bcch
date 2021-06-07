@@ -9,10 +9,14 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 
+/*
+  The component is a parent component of the two other main pokemon components. It has the PokemonCard which contains a brief summary about the Pokemon and when clicked will
+  launch a modal that contains the full information about the Pokemon
+*/
+
 const useStyles = makeStyles((theme) => ({
     root: {
         marginTop: "15%"
-        // border: "1px solid black"
 
     },
     modal: {

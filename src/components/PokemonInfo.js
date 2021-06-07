@@ -10,6 +10,11 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import Carousel from 'react-material-ui-carousel'
 
+/**
+ * This component contains the full overview of a pokemon. It's the parent component of two child components that have
+ * the information about the pokemon divided into
+ */
+
 const useStyles = makeStyles((theme) => ({
     root: {
         display: "flex",

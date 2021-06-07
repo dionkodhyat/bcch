@@ -1,3 +1,8 @@
+/**
+ * This module is for refactoring the data that is retrieved from 
+ * the fetch
+ */
+
 const refactorTypes = (types) => {
     const refactoredTypes = types.map(item => item.type.name);
     return refactoredTypes;

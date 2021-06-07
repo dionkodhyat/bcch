@@ -8,6 +8,10 @@ import { theme } from '../utils/color'
 import { makeStyles, withStyles } from "@material-ui/styles";
 import '../style/style.css'
 
+
+/**
+ * This is the component that displays the stats of the Pokemon which is visually displayed by the progress wheel
+ */
 const useStyles = makeStyles(theme => ({
   root : {
     marginTop: "10"
