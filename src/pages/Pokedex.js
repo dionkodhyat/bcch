@@ -3,6 +3,7 @@ import { refactor } from '../utils/refactor'
 
 const Pokedex = () => {
     const [ query, setQuery ] = React.useState(''); 
+    
 
 
     const handleSubmit = (e) => {

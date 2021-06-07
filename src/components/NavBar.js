@@ -121,7 +121,7 @@ const NavBar = () => {
                     });
         })
         .catch(err => {
-          setData('')
+          setData([])
         })
       }
 
