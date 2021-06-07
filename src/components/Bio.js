@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import icons from '../utils/typesImg'
+import icons from '../utils/typesImg2'
 import { DataContext } from '../utils/context'
 import '../style/style.css'
 import { makeStyles } from '@material-ui/core'
@@ -16,6 +16,10 @@ const useStyles = makeStyles(() => ({
     },
     value : {
         flexBasis: '100%'
+    },
+    img : {
+        height: 15,
+        width: 70
     }
 }))
 
@@ -46,7 +50,8 @@ const Bio = (props) => {
             </divs>
             <div className={classes.value}>
                 {id && <div>#{' ', id}</div>}
-                {types && <div> {types.join(', ')}</div>}
+                {/* {types && <div> {types.join(', ')}</div>} */}
+                {types && types.map(type => <><img className={classes.img} src={icons[type]}/></>)}
                 {height && <div> {height}cm</div>}
                 {weight && <div> {weight}kg</div>}
                 {abilities && <div> {abilities.join(', ')}</div> }  
